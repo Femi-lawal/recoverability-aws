@@ -1,0 +1,160 @@
+femi@ROBOT:/home$ ssh -i  "/home/femi/.ssh/femi.pem" ec2-user@ec2-54-160-212-228.compute-1.amazonaws.com
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+[ec2-user@ip-10-1-10-79 ~]$ client_loop: send disconnect: Broken pipe
+sqfemi@ROBOT:/home$ sql
+-bash: sql: command not found
+femi@ROBOT:/home$ ssh -i  "/home/femi/.ssh/femi.pem" ec2-user@ec2-54-160-212-228.compute-1.amazonaws.com
+Last login: Tue May 25 20:04:20 2021 from 102.89.3.13
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+[ec2-user@ip-10-1-10-79 ~]$ psql
+-bash: psql: command not found
+[ec2-user@ip-10-1-10-79 ~]$ mysql
+-bash: mysql: command not found
+[ec2-user@ip-10-1-10-79 ~]$ mysql
+-bash: mysql: command not found
+[ec2-user@ip-10-1-10-79 ~]$ mysql -h udacity.primarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com -P 3306 -u admin -P password
+-bash: mysql: command not found
+[ec2-user@ip-10-1-10-79 ~]$ yum install mysql-server
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+You need to be root to perform this command.
+[ec2-user@ip-10-1-10-79 ~]$ sudo yum install mysql-server
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+amzn2-core                                                                                             | 3.7 kB  00:00:00     
+No package mysql-server available.
+Error: Nothing to do
+[ec2-user@ip-10-1-10-79 ~]$ sudo yum install mysql
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+Resolving Dependencies
+--> Running transaction check
+---> Package mariadb.x86_64 1:5.5.68-1.amzn2 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+============================================================================================================================== Package                    Arch                      Version                             Repository                     Size 
+==============================================================================================================================Installing:
+ mariadb                    x86_64                    1:5.5.68-1.amzn2                    amzn2-core                    8.8 M 
+
+Transaction Summary
+==============================================================================================================================Install  1 Package
+
+Total download size: 8.8 M
+Installed size: 49 M
+Is this ok [y/d/N]: y
+Downloading packages:
+mariadb-5.5.68-1.amzn2.x86_64.rpm                                                                      | 8.8 MB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : 1:mariadb-5.5.68-1.amzn2.x86_64                                                                            1/1 
+  Verifying  : 1:mariadb-5.5.68-1.amzn2.x86_64                                                                            1/1 
+
+Installed:
+  mariadb.x86_64 1:5.5.68-1.amzn2
+
+Complete!
+[ec2-user@ip-10-1-10-79 ~]$ mysql -h udacity.primarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com -P 3306 -u admin -P password
+Unknown suffix 'p' used for variable 'port' (value 'password')
+mysql: Error while setting value 'password' to 'port'
+[ec2-user@ip-10-1-10-79 ~]$ mysql -h udacity.primarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com -P 3306 -u admin -p password  
+Enter password: 
+ERROR 2005 (HY000): Unknown MySQL server host 'udacity.primarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com' (2)
+[ec2-user@ip-10-1-10-79 ~]$ mysql -h udacity.primarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com -P 3306 -u admin -
+ERROR 2005 (HY000): Unknown MySQL server host 'udacity.primarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com' (2)
+[ec2-user@ip-10-1-10-79 ~]$ mysql -h rimarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com -P 3306 -u admin -
+ERROR 2005 (HY000): Unknown MySQL server host 'rimarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com' (2)
+[ec2-user@ip-10-1-10-79 ~]$ mysql -h primarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com -P 3306 -u admin -
+ERROR 1045 (28000): Access denied for user 'admin'@'10.1.10.79' (using password: NO)
+[ec2-user@ip-10-1-10-79 ~]$ mysql -h primarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 81
+Server version: 8.0.20 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show database
+    -> Ctrl-C -- exit!
+Aborted
+[ec2-user@ip-10-1-10-79 ~]$ mysql -h primarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 83
+Server version: 8.0.20 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| udacity            |
++--------------------+
+4 rows in set (0.00 sec)
+
+MySQL [(none)]> \c udacity;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'udacity' at line 1
+MySQL [(none)]>
+[1]+  Stopped                 mysql -h primarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
+[ec2-user@ip-10-1-10-79 ~]$ mysql -h primarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com -P 3306 -u admin -p^C
+[ec2-user@ip-10-1-10-79 ~]$ mysql -p -h primarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com -P 3306 -u admin udacity
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 84
+Server version: 8.0.20 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [udacity]> CREATE TABLE course (name VARCHAR(225), course_code VARCHAR(30), student_number INT, registration_deadline DATE);
+Query OK, 0 rows affected (0.07 sec)
+
+MySQL [udacity]> INSERT INTO  course (name, course_code, student_number, registration_deadline ) values ('Cloud Architect', 'UDA-NG12912876', 546, '2021-
+    '> Ctrl-C -- exit!
+Aborted
+[ec2-user@ip-10-1-10-79 ~]$ mysql -p -h primarydb.cw1yyph39nr4.us-east-1.rds.amazonaws.com -P 3306 -u admin udacity
+Enter password: 
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 87
+Server version: 8.0.20 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [udacity]> INSERT INTO  course (name, course_code, student_number, registration_deadline ) values ('Cloud Architect', 'UDA-NG12912876', 546, '2021-05-31' );
+Query OK, 1 row affected (0.01 sec)
+
+MySQL [udacity]> select * from course;
++-----------------+----------------+----------------+-----------------------+
+| name            | course_code    | student_number | registration_deadline |
++-----------------+----------------+----------------+-----------------------+
+| Cloud Architect | UDA-NG12912876 |            546 | 2021-05-31            |
++-----------------+----------------+----------------+-----------------------+
+1 row in set (0.01 sec)
+
+MySQL [udacity]> 
