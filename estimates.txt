@@ -1,0 +1,24 @@
+Achievable RTO(Recovery Time Objective) and RPO(Recovery Point Objective) estimations for the Multi-AZ, multi-region database.
+
+1. Minimum RTO for a single AZ outage
+The current database setup is built for high availability, so if the primary database fails, it automatically switches to the standby in another Availability Zone.
+The RTO for a single AZ outage is the amount of time duration of a service interruption for switching from one AZ to the standby one in the same region (inside the subnet group).
+RTO for recovery with an RDS Single-AZ instance failure can vary from minutes to hours. The duration depends on the size of the database and the failure and recovery approach required.
+Seeing as the database size is rather small, recovery should only take less than 2 minutes.
+
+2) Minimum RTO for a single region outage
+In the case of an outage in the primary region, the read replica in the secondary region would need to be promoted to master and applications would need to be reconfigured to use it.
+The RTO for this would be a minimun of about 40 minutes.
+
+3) Minimum RPO for a single AZ outage
+AWS does transactional log backups every 5 minutes which makes restoration of the state of the RDS instance possible.
+RPO for recovery with an RDS Single-AZ instance failure is therefore typically 5 minutes (the interval required for copying transaction logs to Amazon S3).
+
+4)Minimum RPO for a single region outage
+An outage in the primary region would cause the read replica to stop receiving new entries, the steps mentioned in 
+RTO for a single region outage would need to be followed, so the RPO would be about 40 minutes.
+
+References:
+https://aws.amazon.com/blogs/database/amazon-rds-under-the-hood-single-az-instance-recovery/
+https://aws.amazon.com/blogs/database/implementing-a-disaster-recovery-strategy-with-amazon-rds/
+
